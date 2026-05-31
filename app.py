@@ -11,6 +11,20 @@ app.config.from_object(Config)
 # INICIALIZAR BASE DE DATOS
 db.init_app(app)
 
+# IMPORTAR MODELOS PARA CREAR TABLAS
+from models.bus import Bus
+from models.linea import Linea
+from models.estacion import Estacion
+from models.empleado import Empleado
+from models.acceso import Acceso
+from models.parqueo import Parqueo
+from models.linea_estacion import LineaEstacion
+from models.municipalidad import Municipalidad
+
+# CREAR TABLAS
+with app.app_context():
+    db.create_all()
+
 # IMPORTAR RUTAS
 from routes.buses import buses
 from routes.lineas import lineas
