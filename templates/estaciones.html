@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Control de Estaciones
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/estaciones/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nombre
+        </label>
+
+        <input type="text"
+               name="nombre"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Capacidad
+        </label>
+
+        <input type="number"
+               name="capacidad"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Zona
+        </label>
+
+        <input type="text"
+               name="zona"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Personas actuales
+        </label>
+
+        <input type="number"
+               name="personas_actuales"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Municipalidad
+        </label>
+
+        <select name="municipalidad_id"
+                class="form-control">
+
+            {% for muni in municipalidades %}
+
+            <option value="{{ muni.id }}">
+
+                {{ muni.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Operador
+        </label>
+
+        <select name="empleado_id"
+                class="form-control">
+
+            {% for operador in operadores %}
+
+            <option value="{{ operador.id }}">
+
+                {{ operador.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Capacidad</th>
+    <th>Zona</th>
+    <th>Municipalidad</th>
+    <th>Operador</th>
+    <th>Estado</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for estacion in estaciones %}
+
+<tr>
+
+    <td>{{ estacion.id }}</td>
+
+    <td>{{ estacion.nombre }}</td>
+
+    <td>{{ estacion.capacidad }}</td>
+
+    <td>{{ estacion.zona }}</td>
+
+    <td>
+
+        {{ estacion.municipalidad.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ estacion.empleado.nombre }}
+
+    </td>
+
+    <td>
+
+        {% if estacion.alerta_ocupacion() %}
+
+            <span class="text-danger fw-bold">
+                ALERTA
+            </span>
+
+        {% else %}
+
+            <span class="text-success fw-bold">
+                NORMAL
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        <a href="/estaciones/eliminar/{{ estacion.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

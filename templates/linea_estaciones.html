@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Asignar Estaciones a Líneas
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/linea_estaciones/crear"
+      method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Línea
+        </label>
+
+        <select name="linea_id"
+                class="form-control">
+
+            {% for linea in lineas %}
+
+            <option value="{{ linea.id }}">
+
+                {{ linea.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Estación
+        </label>
+
+        <select name="estacion_id"
+                class="form-control">
+
+            {% for estacion in estaciones %}
+
+            <option value="{{ estacion.id }}">
+
+                {{ estacion.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Orden
+        </label>
+
+        <input type="number"
+               name="orden"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Distancia
+        </label>
+
+        <input type="number"
+               step="0.1"
+               name="distancia"
+               class="form-control">
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Línea</th>
+    <th>Estación</th>
+    <th>Orden</th>
+    <th>Distancia</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for relacion in relaciones %}
+
+<tr>
+
+    <td>{{ relacion.id }}</td>
+
+    <td>
+
+        {{ relacion.linea.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ relacion.estacion.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ relacion.orden }}
+
+    </td>
+
+    <td>
+
+        {{ relacion.distancia }} km
+
+    </td>
+
+    <td>
+
+        <a href="/linea_estaciones/eliminar/{{ relacion.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

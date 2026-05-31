@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Control de Buses
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/buses/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Placa
+        </label>
+
+        <input type="text"
+               name="placa"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Capacidad
+        </label>
+
+        <input type="number"
+               name="capacidad"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Pasajeros
+        </label>
+
+        <input type="number"
+               name="pasajeros"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Piloto
+        </label>
+
+        <select name="empleado_id"
+                class="form-control">
+
+            {% for piloto in pilotos %}
+
+            <option value="{{ piloto.id }}">
+
+                {{ piloto.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Parqueo
+        </label>
+
+        <select name="parqueo_id"
+                class="form-control">
+
+            {% for parqueo in parqueos %}
+
+            <option value="{{ parqueo.id }}">
+
+                {{ parqueo.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Línea
+        </label>
+
+        <select name="linea_id"
+                class="form-control">
+
+            {% for linea in lineas %}
+
+            <option value="{{ linea.id }}">
+
+                {{ linea.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Placa</th>
+    <th>Capacidad</th>
+    <th>Pasajeros</th>
+    <th>Estado</th>
+    <th>Piloto</th>
+    <th>Parqueo</th>
+    <th>Línea</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for bus in buses %}
+
+<tr>
+
+    <td>{{ bus.id }}</td>
+
+    <td>{{ bus.placa }}</td>
+
+    <td>{{ bus.capacidad }}</td>
+
+    <td>{{ bus.pasajeros }}</td>
+
+    <td>
+
+        {% if bus.estado_ocupacion() == "ESPERAR 5 MIN" %}
+
+            <span class="text-danger fw-bold">
+
+                ALERTA
+
+            </span>
+
+        {% else %}
+
+            <span class="text-success fw-bold">
+
+                NORMAL
+
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        {{ bus.empleado.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ bus.parqueo.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ bus.linea.nombre }}
+
+    </td>
+
+    <td>
+
+        <a href="/buses/eliminar/{{ bus.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

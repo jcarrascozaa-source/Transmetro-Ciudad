@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Control de Líneas
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/lineas/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nombre
+        </label>
+
+        <input type="text"
+               name="nombre"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Color
+        </label>
+
+        <input type="text"
+               name="color"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Municipalidad
+        </label>
+
+        <select name="municipalidad_id"
+                class="form-control">
+
+            {% for muni in municipalidades %}
+
+            <option value="{{ muni.id }}">
+
+                {{ muni.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Color</th>
+    <th>Municipalidad</th>
+    <th>Distancia Total</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for linea in lineas %}
+
+<tr>
+
+    <td>{{ linea.id }}</td>
+
+    <td>{{ linea.nombre }}</td>
+
+    <td>{{ linea.color }}</td>
+
+    <td>
+
+        {{ linea.municipalidad.nombre }}
+
+    </td>
+
+    <td>
+
+        {{ linea.calcular_distancia_total() }} km
+
+    </td>
+
+    <td>
+
+        <a href="/lineas/eliminar/{{ linea.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

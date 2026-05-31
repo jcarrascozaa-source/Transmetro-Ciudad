@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Parqueos
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/parqueos/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nombre
+        </label>
+
+        <input type="text"
+               name="nombre"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Capacidad
+        </label>
+
+        <input type="number"
+               name="capacidad"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Estación
+        </label>
+
+        <select name="estacion_id"
+                class="form-control">
+
+            {% for estacion in estaciones %}
+
+            <option value="{{ estacion.id }}">
+
+                {{ estacion.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Capacidad</th>
+    <th>Estación</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for parqueo in parqueos %}
+
+<tr>
+
+    <td>{{ parqueo.id }}</td>
+
+    <td>{{ parqueo.nombre }}</td>
+
+    <td>{{ parqueo.capacidad }}</td>
+
+    <td>{{ parqueo.estacion_id }}</td>
+
+    <td>
+
+        <a href="/parqueos/eliminar/{{ parqueo.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

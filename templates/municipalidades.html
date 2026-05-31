@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">Municipalidades</h1>
+
+<div class="card p-4 mb-4">
+<form action="/municipalidades/crear" method="POST">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" name="nombre" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+</div>
+
+<table class="table table-bordered table-striped">
+<tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Acciones</th>
+</tr>
+
+{% for m in municipios %}
+<tr>
+    <td>{{ m.id }}</td>
+    <td>{{ m.nombre }}</td>
+    <td>
+        <a href="/municipalidades/eliminar/{{ m.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

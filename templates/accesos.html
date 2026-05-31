@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Accesos
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/accesos/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nombre
+        </label>
+
+        <input type="text"
+               name="nombre"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Descripción
+        </label>
+
+        <input type="text"
+               name="descripcion"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Estación
+        </label>
+
+        <select name="estacion_id"
+                class="form-control">
+
+            {% for estacion in estaciones %}
+
+            <option value="{{ estacion.id }}">
+
+                {{ estacion.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Guardia
+        </label>
+
+        <select name="empleado_id"
+                class="form-control">
+
+            {% for guardia in guardias %}
+
+            <option value="{{ guardia.id }}">
+
+                {{ guardia.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Estación</th>
+    <th>Guardia</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for acceso in accesos %}
+
+<tr>
+
+    <td>{{ acceso.id }}</td>
+
+    <td>{{ acceso.nombre }}</td>
+
+    <td>{{ acceso.descripcion }}</td>
+
+    <td>{{ acceso.estacion_id }}</td>
+
+    <td>{{ acceso.empleado_id }}</td>
+
+    <td>
+
+        <a href="/accesos/eliminar/{{ acceso.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

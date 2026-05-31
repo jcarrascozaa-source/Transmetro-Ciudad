@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Dashboard Transmetro
+</h1>
+
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-primary text-white p-4">
+
+            <h3>Total Buses</h3>
+
+            <h1>
+
+                {{ total_buses }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-success text-white p-4">
+
+            <h3>Total Estaciones</h3>
+
+            <h1>
+
+                {{ total_estaciones }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-dark text-white p-4">
+
+            <h3>Total Líneas</h3>
+
+            <h1>
+
+                {{ total_lineas }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-warning text-dark p-4">
+
+            <h3>Total Empleados</h3>
+
+            <h1>
+
+                {{ total_empleados }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-info text-white p-4">
+
+            <h3>Buses en Espera</h3>
+
+            <h1>
+
+                {{ buses_espera }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-danger text-white p-4">
+
+            <h3>Estaciones en Alerta</h3>
+
+            <h1>
+
+                {{ estaciones_alerta }}
+
+            </h1>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

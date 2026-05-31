@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Empleados
+</h1>
+
+<div class="card p-4 mb-4">
+
+<form action="/empleados/crear" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nombre
+        </label>
+
+        <input type="text"
+               name="nombre"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            DPI
+        </label>
+
+        <input type="text"
+               name="dpi"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Teléfono
+        </label>
+
+        <input type="text"
+               name="telefono"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Dirección
+        </label>
+
+        <input type="text"
+               name="direccion"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Nivel educativo
+        </label>
+
+        <input type="text"
+               name="nivel_educativo"
+               class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Tipo
+        </label>
+
+        <select name="tipo"
+                class="form-control">
+
+            <option value="piloto">
+                Piloto
+            </option>
+
+            <option value="guardia">
+                Guardia
+            </option>
+
+            <option value="operador">
+                Operador
+            </option>
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Guardar
+
+    </button>
+
+</form>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>DPI</th>
+    <th>Teléfono</th>
+    <th>Dirección</th>
+    <th>Educación</th>
+    <th>Tipo</th>
+    <th>Acciones</th>
+
+</tr>
+
+{% for empleado in empleados %}
+
+<tr>
+
+    <td>{{ empleado.id }}</td>
+
+    <td>{{ empleado.nombre }}</td>
+
+    <td>{{ empleado.dpi }}</td>
+
+    <td>{{ empleado.telefono }}</td>
+
+    <td>{{ empleado.direccion }}</td>
+
+    <td>{{ empleado.nivel_educativo }}</td>
+
+    <td>{{ empleado.tipo }}</td>
+
+    <td>
+
+        <a href="/empleados/eliminar/{{ empleado.id }}"
+           class="btn btn-danger btn-sm">
+
+            Eliminar
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
